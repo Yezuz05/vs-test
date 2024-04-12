@@ -1,15 +1,30 @@
 <script setup lang="ts">
+    import { GET_CORPORATE_LANDING_PAGE } from '~/graphql/queries';
+    import type { LandingPageResponse } from '~/types';
     import VideoIcon from '~/assets/icons/video.svg';
     import BookIcon from '~/assets/icons/book.svg';
     import ClockIcon from '~/assets/icons/clock.svg';
-    import LeafIcon from '~/assets/icons/leaf.svg';
     import CheckCircleIcon from '~/assets/icons/check-circle.svg';
     import CloseCircleIcon from '~/assets/icons/close-circle.svg';
     import InfoIcon from '~/assets/icons/info.svg';
     import SeatsIcon from '~/assets/icons/seats.svg';
-    import RocketLaunchIcon from '~/assets/icons/rocket-launch.svg';
-    import BoltIcon from '~/assets/icons/bolt.svg';
     import CalendarIcon from '~/assets/icons/calendar.svg';
+
+
+    const { data } = await useAsyncData('corporateTraining', async (ctx) => {
+        const { $hygraph } = ctx!;
+        
+        const res = await $hygraph.request<LandingPageResponse>(GET_CORPORATE_LANDING_PAGE);
+        return res;
+    })
+
+    const landingPageData = data.value?.landingPages[0]!;
+
+    const metrics = landingPageData.metrics;
+
+    const getMetric = (metric: string) => {
+        return metrics.find((m) => m.key === metric)?.value;
+    }
 </script>
 
 <template>
@@ -17,19 +32,17 @@
         <section class="flex flex-col xl:flex-row xl:items-center section-container text-center xl:text-start xl:justify-between text-white gap-12 sm:px-[83px] xl:px-[135px] pt-[32px] sm:pt-12 lg:pt-[32px]">
             <div class="flex flex-col gap-6 sm:gap-10 sm:px-5 xl:px-0 xl:w-[570px] flex-shrink-0">
                 <h1 class="text-[40px] sm:text-6xl font-bold">
-                    Complete <span class="text-primary">Vue.js training</span> solutions for companies
+                    {{landingPageData.title[0]}} <span class="text-primary">{{landingPageData.title[1]}}</span> {{landingPageData.title[2]}}
                 </h1>
                 <p class="sm:text-[22px]">
-                    Training solutions designed for companies, 
-                    agencies and organisations with developers 
-                    using or who are considering using the Vue.js framework
+                    {{landingPageData.subtitle}}
                 </p>
-                <button class="btn btn--fill w-[176px] mx-auto xl:ml-0">Talk to Sales</button>
+                <button class="btn btn--fill w-[176px] mx-auto xl:ml-0">{{landingPageData.cta}}</button>
             </div>
             <div class="flex w-full sm:max-w-[602px] sm:mx-auto">
                 <img src="~/assets/img/hero.png" alt="Corporate training" />
             </div>
-        </section>
+        </section>  
         <div class="waves"></div>
         <section class="flex flex-col section-container gap-16 pb-[60px] pt-[104px] sm:pt-[100px] xl:pt-[53px]">
             <div class="flex flex-col sm:flex-row gap-6 bg-midnight-haze bg-opacity-90 rounded-[30px] p-6 sm:py-10 xl:px-10">
@@ -78,7 +91,7 @@
             <div class="flex gap-6 sm:gap-[61px] mx-auto">
                 <div class="flex flex-col gap-[11px]">
                     <p class="text-gradient text-[64px] sm:text-[90px] leading-[75px] sm:leading-[106px] font-medium">
-                        763
+                        {{ getMetric('lessons') }}
                     </p>
                     <div class="flex gap-[10px] text-silver text-sm sm:justify-center">
                         <VideoIcon :fontControlled="false" class="w-[18px] h-[18px]" />
@@ -87,7 +100,7 @@
                 </div>
                 <div class="flex flex-col gap-[11px]">
                     <p class="text-gradient text-[64px] sm:text-[90px] leading-[75px] sm:leading-[106px] font-medium">
-                        40
+                        {{ getMetric('courses') }}
                     </p>
                     <div class="flex gap-[10px] text-silver text-sm sm:justify-center">
                         <BookIcon :fontControlled="false" class="w-[18px] h-[18px]" />
@@ -96,11 +109,11 @@
                 </div>
                 <div class="flex flex-col gap-[11px]">
                     <p class="text-gradient text-[64px] sm:text-[90px] leading-[75px] sm:leading-[106px] font-medium">
-                        64
+                        {{ getMetric('hours') }}
                     </p>
                     <div class="flex gap-[10px] text-silver text-sm sm:justify-center">
                         <ClockIcon :fontControlled="false" class="w-[18px] h-[18px]" />
-                        <span>15 hours</span>
+                        <span>hours</span>
                     </div>
                 </div>
             </div>
@@ -110,251 +123,88 @@
                 Discounted <span class="text-gradient-mix">Corporate Training</span> Bundles
             </h2>
             <div class="flex flex-col xl:flex-row gap-6 xl:gap-[30px] xl:justify-between">
-                <div class="bundle">
-                    <div class="flex gap-4">
-                        <div class="w-8 h-8 flex items-center justify-center">
-                            <LeafIcon :fontControlled="false" class="w-[19px] h-[25px]" filled />
-                        </div>
-                        <h5 class="text-silver font-bold text-[22px]">Basic</h5>
-                    </div>
-                    <div class="flex flex-col gap-6">
-                        <p class="text-primary leading-6">Includes 1 year access to:</p>
-                        <ul class="flex flex-col gap-4">
-                            <li class="flex items-center gap-4">
-                                <CheckCircleIcon :fontControlled="false" class="w-[18px] h-[18px]" filled />
-                                <span class="text-silver text-sm leading-5">All Video Courses</span>
-                                <InfoIcon :fontControlled="false" class="w-[14px] h-[14px] ml-auto" filled />
-                            </li>
-                            <li class="flex items-center gap-4">
-                                <CheckCircleIcon :fontControlled="false" class="w-[18px] h-[18px]" filled />
-                                <span class="text-silver text-sm leading-5">Vue.Js Master class</span>
-                                <InfoIcon :fontControlled="false" class="w-[14px] h-[14px] ml-auto" filled />
-                            </li>
-                            <li class="flex items-center gap-4">
-                                <CheckCircleIcon :fontControlled="false" class="w-[18px] h-[18px]" filled />
-                                <span class="text-silver text-sm leading-5">Developer assist Slack channel</span>
-                                <InfoIcon :fontControlled="false" class="w-[14px] h-[14px] ml-auto" filled />
-                            </li>
-                            <li class="flex items-center gap-4 opacity-20">
-                                <CloseCircleIcon :fontControlled="false" class="w-[18px] h-[18px]" filled />
-                                <span class="text-silver text-sm leading-5">Live Weekly QnA</span>
-                            </li>
-                            <li class="flex items-center gap-4 opacity-20">
-                                <CloseCircleIcon :fontControlled="false" class="w-[18px] h-[18px]" filled />
-                                <span class="text-silver text-sm leading-5">1 x vs ticket per license</span>
-                            </li>
-                        </ul>
-                        <div class="bg-phantom-blue rounded-2xl py-6 px-4">
-                            <div class="flex items-center gap-[10px] mb-6">
-                                <span class="font-bold text-[40px] text-white leading-[50px]">
-                                    $50
-                                </span>
-                                <span class="text-grey">/ seat / month</span>
+                <template v-for="bundle in landingPageData.prices">
+                    <div class="bundle">
+                        <div class="flex gap-4">
+                            <div class="w-8 h-8 py-1 px-[6px] flex items-center justify-center">
+                                <img class="object-contain" :src="`/images/${bundle.icon}.svg`" :alt="bundle.title" />
                             </div>
-                            <div class="flex flex-col gap-3 mb-4">
-                                <p class="font-bold text-white leading-[18px]">How many licenses do you need?</p>
-                                <div class="flex flex-col">
-                                    <span class="h-[22px]">
-                                        <input type="range" id="licenses" class="licenses-slider" name="licenses" min="5" max="20" />
-                                    </span>
-                                    <label for="licenses" class="flex justify-between text-sm font-medium text-dusk-blue">
-                                        <span>5</span>
-                                        <span>20</span>
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="flex items-center gap-5 justify-between sm:justify-normal">
-                                <div class="flex items-center py-1 px-[14px] gap-[10px] bg-midnight-essence bg-opacity-20 rounded-lg">
-                                    <SeatsIcon :fontControlled="false" class="w-[18px] h-[18px]" filled />
-                                    <span class="text-white text-[26px] font-bold leading-[30px]">
-                                        12
-                                    </span>
-                                    <span class="text-grey">
-                                        seats
-                                    </span>
-                                </div>
-                                <p class="text-primary font-medium">
-                                    26% discount
-                                </p>
-                            </div>
+                            <h5 class="text-silver font-bold text-[22px]">{{ bundle.title }}</h5>
                         </div>
                         <div class="flex flex-col gap-6">
-                            <a href="#" class="btn btn--fill">
-                                Start learning
-                            </a>
-                            <a class="text-primary mx-auto font-medium leading-[18px]" href="">Refer your manager</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="bundle">
-                    <div class="flex gap-4">
-                        <div class="w-8 h-8 flex items-center justify-center">
-                            <RocketLaunchIcon :fontControlled="false" class="w-[19px] h-[25px]" filled />
-                        </div>
-                        <h5 class="text-silver font-bold text-[22px]">Professional</h5>
-                    </div>
-                    <div class="flex flex-col gap-6">
-                        <p class="text-primary leading-6">Includes 1 year access to:</p>
-                        <ul class="flex flex-col gap-4">
-                            <li class="flex items-center gap-4">
-                                <CheckCircleIcon :fontControlled="false" class="w-[18px] h-[18px]" filled />
-                                <span class="text-silver text-sm leading-5">All Video Courses</span>
-                                <InfoIcon :fontControlled="false" class="w-[14px] h-[14px] ml-auto" filled />
-                            </li>
-                            <li class="flex items-center gap-4">
-                                <CheckCircleIcon :fontControlled="false" class="w-[18px] h-[18px]" filled />
-                                <span class="text-silver text-sm leading-5">Vue.Js Master class</span>
-                                <InfoIcon :fontControlled="false" class="w-[14px] h-[14px] ml-auto" filled />
-                            </li>
-                            <li class="flex items-center gap-4">
-                                <CheckCircleIcon :fontControlled="false" class="w-[18px] h-[18px]" filled />
-                                <span class="text-silver text-sm leading-5">Developer assist Slack channel</span>
-                                <InfoIcon :fontControlled="false" class="w-[14px] h-[14px] ml-auto" filled />
-                            </li>
-                            <li class="flex items-center gap-4">
-                                <CheckCircleIcon :fontControlled="false" class="w-[18px] h-[18px]" filled />
-                                <span class="text-silver text-sm leading-5 font-bold">Live Weekly QnA</span>
-                                <InfoIcon :fontControlled="false" class="w-[14px] h-[14px] ml-auto" filled />
-                            </li>
-                            <li class="flex items-center gap-4">
-                                <CheckCircleIcon :fontControlled="false" class="w-[18px] h-[18px]" filled />
-                                <span class="text-silver text-sm leading-5 font-bold">1 x vs ticket per license</span>
-                                <InfoIcon :fontControlled="false" class="w-[14px] h-[14px] ml-auto" filled />
-                            </li>
-                        </ul>
-                        <div class="flex items-center gap-4 bg-primary bg-opacity-20 h-[80px] py-4 px-6 rounded-[10px]">
-                            <div class="flex rounded-md w-12 h-12">
-                                <img src="~/assets/img/vue-mastery.png" alt="Vue mastery">
-                            </div>
-                            <div class="flex flex-col font-medium">
-                                <p class="text-grey text-sm">
-                                    Enough time to watch:
-                                </p>
-                                <p class="text-white text-lg">
-                                    The Vue 3 Masterclass
-                                </p>
-                            </div>
-                        </div>
-                        <div class="bg-phantom-blue rounded-2xl py-6 px-4">
-                            <div class="flex items-center gap-[10px] mb-6">
-                                <span class="font-bold text-[40px] text-white leading-[50px]">
-                                    $50
-                                </span>
-                                <span class="text-grey">/ seat / month</span>
-                            </div>
-                            <div class="flex flex-col gap-3 mb-4">
-                                <p class="font-bold text-white leading-[18px]">How many licenses do you need?</p>
-                                <div class="flex flex-col">
-                                    <span class="h-[22px]">
-                                        <input type="range" id="licenses" class="licenses-slider" name="licenses" min="5" max="20" />
-                                    </span>
-                                    <label for="licenses" class="flex justify-between text-sm font-medium text-dusk-blue">
-                                        <span>5</span>
-                                        <span>20</span>
-                                    </label>
+                            <p class="text-primary leading-6">Includes 1 year access to:</p>
+                            <ul class="flex flex-col gap-4">
+                                <li v-for="feature in bundle.baseFeatures" class="flex items-center gap-4">
+                                    <CheckCircleIcon :fontControlled="false" class="w-[18px] h-[18px]" filled />
+                                    <span class="text-silver text-sm leading-5">{{feature}}</span>
+                                    <InfoIcon :fontControlled="false" class="w-[14px] h-[14px] ml-auto" filled />
+                                </li>
+                                <li v-for="feature in bundle.unsupportedFeatures" class="flex items-center gap-4 opacity-20">
+                                    <CloseCircleIcon :fontControlled="false" class="w-[18px] h-[18px]" filled />
+                                    <span class="text-silver text-sm leading-5">{{feature}}</span>
+                                </li>
+                                <li v-for="feature in bundle.specialFeatures" class="flex items-center gap-4">
+                                    <CheckCircleIcon :fontControlled="false" class="w-[18px] h-[18px]" filled />
+                                    <span class="text-silver text-sm leading-5 font-bold">{{feature}}</span>
+                                    <InfoIcon :fontControlled="false" class="w-[14px] h-[14px] ml-auto" filled />
+                                </li>
+                            </ul>
+                            <div v-if="bundle.title === 'Professional'" class="flex items-center gap-4 bg-primary bg-opacity-20 h-[80px] py-4 px-6 rounded-[10px]">
+                                <div class="flex rounded-md w-12 h-12">
+                                    <img src="~/assets/img/vue-mastery.png" alt="Vue mastery">
+                                </div>
+                                <div class="flex flex-col font-medium">
+                                    <p class="text-grey text-sm">
+                                        Enough time to watch:
+                                    </p>
+                                    <p class="text-white text-lg">
+                                        The Vue 3 Masterclass
+                                    </p>
                                 </div>
                             </div>
-                            <div class="flex items-center gap-5 justify-between sm:justify-normal">
-                                <div class="flex items-center py-1 px-[14px] gap-[10px] bg-midnight-essence bg-opacity-20 rounded-lg">
-                                    <SeatsIcon :fontControlled="false" class="w-[18px] h-[18px]" filled />
-                                    <span class="text-white text-[26px] font-bold leading-[30px]">
-                                        12
+                            <div class="bg-phantom-blue rounded-2xl py-6 px-4">
+                                <div class="flex items-center gap-[10px] mb-6">
+                                    <span class="font-bold text-[40px] text-white leading-[50px]">
+                                        ${{bundle.amount}}
                                     </span>
-                                    <span class="text-grey">
-                                        seats
-                                    </span>
+                                    <span class="text-grey">/ seat / month</span>
                                 </div>
-                                <p class="text-primary font-medium">
-                                    26% discount
-                                </p>
-                            </div>
-                        </div>
-                        <div class="flex flex-col gap-6">
-                            <a href="#" class="btn btn--fill">
-                                Start learning
-                            </a>
-                            <a class="text-primary mx-auto font-medium leading-[18px]" href="">Refer your manager</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="bundle">
-                    <div class="flex gap-4">
-                        <div class="w-8 h-8 flex items-center justify-center">
-                            <BoltIcon :fontControlled="false" class="w-[19px] h-[25px]" filled />
-                        </div>
-                        <h5 class="text-silver font-bold text-[22px]">Enterprise</h5>
-                    </div>
-                    <div class="flex flex-col gap-6">
-                        <p class="text-primary leading-6">Includes 1 year access to:</p>
-                        <ul class="flex flex-col gap-4">
-                            <li class="flex items-center gap-4">
-                                <CheckCircleIcon :fontControlled="false" class="w-[18px] h-[18px]" filled />
-                                <span class="text-silver text-sm leading-5">All Video Courses</span>
-                                <InfoIcon :fontControlled="false" class="w-[14px] h-[14px] ml-auto" filled />
-                            </li>
-                            <li class="flex items-center gap-4">
-                                <CheckCircleIcon :fontControlled="false" class="w-[18px] h-[18px]" filled />
-                                <span class="text-silver text-sm leading-5">Vue.Js Master class</span>
-                                <InfoIcon :fontControlled="false" class="w-[14px] h-[14px] ml-auto" filled />
-                            </li>
-                            <li class="flex items-center gap-4">
-                                <CheckCircleIcon :fontControlled="false" class="w-[18px] h-[18px]" filled />
-                                <span class="text-silver text-sm leading-5">Developer assist Slack channel</span>
-                                <InfoIcon :fontControlled="false" class="w-[14px] h-[14px] ml-auto" filled />
-                            </li>
-                            <li class="flex items-center gap-4">
-                                <CheckCircleIcon :fontControlled="false" class="w-[18px] h-[18px]" filled />
-                                <span class="text-silver text-sm leading-5">Live Weekly QnA</span>
-                                <InfoIcon :fontControlled="false" class="w-[14px] h-[14px] ml-auto" filled />
-                            </li>
-                            <li class="flex items-center gap-4">
-                                <CheckCircleIcon :fontControlled="false" class="w-[18px] h-[18px]" filled />
-                                <span class="text-silver text-sm leading-5 font-bold">4 x Virtual Workshop of your choice</span>
-                                <InfoIcon :fontControlled="false" class="w-[14px] h-[14px] ml-auto" filled />
-                            </li>
-                        </ul>
-                        <div class="bg-phantom-blue rounded-2xl py-6 px-4">
-                            <div class="flex items-center gap-[10px] mb-6">
-                                <span class="font-bold text-[40px] text-white leading-[50px]">
-                                    $50
-                                </span>
-                                <span class="text-grey">/ seat / month</span>
-                            </div>
-                            <div class="flex flex-col gap-3 mb-4">
-                                <p class="font-bold text-white leading-[18px]">How many licenses do you need?</p>
-                                <div class="flex flex-col">
-                                    <span class="h-[22px]">
-                                        <input type="range" id="licenses" class="licenses-slider" name="licenses" min="5" max="20" />
-                                    </span>
-                                    <label for="licenses" class="flex justify-between text-sm font-medium text-dusk-blue">
-                                        <span>5</span>
-                                        <span>20</span>
-                                    </label>
+                                <div class="flex flex-col gap-3 mb-4">
+                                    <p class="font-bold text-white leading-[18px]">How many licenses do you need?</p>
+                                    <div class="flex flex-col">
+                                        <span class="h-[22px]">
+                                            <input type="range" id="licenses" class="licenses-slider" name="licenses" min="5" max="20" />
+                                        </span>
+                                        <label for="licenses" class="flex justify-between text-sm font-medium text-dusk-blue">
+                                            <span>5</span>
+                                            <span>20</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="flex items-center gap-5 justify-between sm:justify-normal">
+                                    <div class="flex items-center py-1 px-[14px] gap-[10px] bg-midnight-essence bg-opacity-20 rounded-lg">
+                                        <SeatsIcon :fontControlled="false" class="w-[18px] h-[18px]" filled />
+                                        <span class="text-white text-[26px] font-bold leading-[30px]">
+                                            12
+                                        </span>
+                                        <span class="text-grey">
+                                            seats
+                                        </span>
+                                    </div>
+                                    <p class="text-primary font-medium">
+                                        {{bundle.discount}}% discount
+                                    </p>
                                 </div>
                             </div>
-                            <div class="flex items-center gap-5 justify-between sm:justify-normal">
-                                <div class="flex items-center py-1 px-[14px] gap-[10px] bg-midnight-essence bg-opacity-20 rounded-lg">
-                                    <SeatsIcon :fontControlled="false" class="w-[18px] h-[18px]" filled />
-                                    <span class="text-white text-[26px] font-bold leading-[30px]">
-                                        12
-                                    </span>
-                                    <span class="text-grey">
-                                        seats
-                                    </span>
-                                </div>
-                                <p class="text-primary font-medium">
-                                    26% discount
-                                </p>
+                            <div class="flex flex-col gap-6">
+                                <a href="#" class="btn btn--fill">
+                                    Start learning
+                                </a>
+                                <a class="text-primary mx-auto font-medium leading-[18px]" href="">Refer your manager</a>
                             </div>
                         </div>
-                        <div class="flex flex-col gap-6">
-                            <a href="#" class="btn btn--fill">
-                                Start learning
-                            </a>
-                            <a class="text-primary mx-auto font-medium leading-[18px]" href="">Refer your manager</a>
-                        </div>
                     </div>
-                </div>
+                </template>
             </div>
         </section>
         <section class="section-container flex flex-col pt-[60px] pb-[50px] sm:pb-[70px] xl:pb-[100px]">
