@@ -1,6 +1,7 @@
-# Nuxt 3 Minimal Starter
+# Vue School Frontend Developer Showdown Test
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+## Data Update Explanation
+
 
 ## Setup
 
