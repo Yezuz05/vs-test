@@ -15,19 +15,18 @@ import { MENU_ITEMS } from '~/data/constants';
         </div>
         <div class="menu">
             <template v-for="item in MENU_ITEMS" :key="item.title">
-                <a :class="['menu__item', {'menu__item--dropdown': Boolean(item.children)}]" :href="item.link">
+                <button class="menu__item menu__item--dropdown" v-if="item.children">
                     {{ item.title }}
-                    <template v-if="item.children">
-                        <ChevronDownIcon  class="w-[10px] h-[10px]" :fontControlled="false" />
+                    <ChevronDownIcon class="w-[10px] h-[10px]" :fontControlled="false" />
     
-                        <div class="dropdown">
-                            <template v-for="child in item.children" :key="child.title">
-                                <a class="" :href="child.link">
-                                    {{ child.title }}
-                                </a>
-                            </template>
-                        </div>
-                    </template>
+                    <div class="dropdown">
+                        <a v-for="child in item.children" :key="child.title" :href="child.link">
+                            {{ child.title }}
+                        </a>
+                    </div>
+                </button>
+                <a v-else class="menu__item" :href="item.link">
+                    {{ item.title }}
                 </a>
             </template>
         </div>
@@ -57,7 +56,7 @@ import { MENU_ITEMS } from '~/data/constants';
                 }
             }
             .dropdown {
-                @apply hidden flex-col gap-1 absolute top-[100%] left-0 bg-midnight-haze p-4 shadow-lg rounded-lg min-w-[220px];
+                @apply hidden flex-col gap-1 absolute top-[90%] left-0 bg-midnight-haze p-4 shadow-lg rounded-lg min-w-[220px];
                 a {
                     @apply text-silver flex py-2;
                     &:hover {
