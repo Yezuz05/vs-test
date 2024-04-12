@@ -40,14 +40,14 @@
                 <button class="btn btn--fill w-[176px] mx-auto xl:ml-0">{{landingPageData.cta}}</button>
             </div>
             <div class="flex w-full sm:max-w-[602px] sm:mx-auto">
-                <img src="~/assets/img/hero.png" alt="Corporate training" />
+                <NuxtImg src="/images/hero.png" alt="Corporate training" />
             </div>
         </section>  
         <div class="waves"></div>
         <section class="flex flex-col section-container gap-16 pb-[60px] pt-[104px] sm:pt-[100px] xl:pt-[53px]">
             <div class="flex flex-col sm:flex-row gap-6 bg-midnight-haze bg-opacity-90 rounded-[30px] p-6 sm:py-10 xl:px-10">
                 <div class="flex justify-center items-center w-[85px] h-[88px] sm:w-[152px] sm:h-[158px] xl:w-[280px] xl:h-[247] px-3 sm:px-5 py-[10px] sm:py-4 xl:py-[47px] xl:px-[72px] flex-shrink-0 mx-auto">
-                    <img src="~/assets/img/logo-small.png" alt="Vue school" />
+                    <NuxtImg src="/images/logo-small.png" alt="Vue school" />
                 </div>
                 <div class="flex flex-col gap-4 sm:gap-8 text-white text-center sm:text-start">
                     <h2 class="font-bold text-2xl sm:text-[40px] leading-7 sm:leading-[48px]">
@@ -61,22 +61,22 @@
             </div>
             <div class="hidden xl:flex gap-[31px]">
                 <div class="flex w-[169px] h-[60px] px-[25.2px] pt-[10px]">
-                    <img class="object-contain" src="~/assets/img/google-logo.png" alt="Google" />
+                    <NuxtImg class="object-contain" src="/images/google-logo.png" alt="Google" />
                 </div>
                 <div class="flex w-[169px] h-[60px] px-[25.2px] pt-[10px]">
-                    <img class="object-contain" src="~/assets/img/google-logo.png" alt="Google" />
+                    <NuxtImg class="object-contain" src="/images/google-logo.png" alt="Google" />
                 </div>
                 <div class="flex w-[169px] h-[60px] px-[25.2px] pt-[10px]">
-                    <img class="object-contain" src="~/assets/img/google-logo.png" alt="Google" />
+                    <NuxtImg class="object-contain" src="/images/google-logo.png" alt="Google" />
                 </div>
                 <div class="flex w-[169px] h-[60px] px-[25.2px] pt-[10px]">
-                    <img class="object-contain" src="~/assets/img/google-logo.png" alt="Google" />
+                    <NuxtImg class="object-contain" src="/images/google-logo.png" alt="Google" />
                 </div>
                 <div class="flex w-[169px] h-[60px] px-[25.2px] pt-[10px]">
-                    <img class="object-contain" src="~/assets/img/google-logo.png" alt="Google" />
+                    <NuxtImg class="object-contain" src="/images/google-logo.png" alt="Google" />
                 </div>
                 <div class="flex w-[169px] h-[60px] px-[25.2px] pt-[10px]">
-                    <img class="object-contain" src="~/assets/img/google-logo.png" alt="Google" />
+                    <NuxtImg class="object-contain" src="/images/google-logo.png" alt="Google" />
                 </div>
             </div>
         </section>
@@ -127,9 +127,9 @@
                     <div class="bundle">
                         <div class="flex gap-4">
                             <div class="w-8 h-8 py-1 px-[6px] flex items-center justify-center">
-                                <img class="object-contain" :src="`/images/${bundle.icon}.svg`" :alt="bundle.title" />
+                                <NuxtImg class="object-contain" :src="`/images/${bundle.icon}.svg`" :alt="bundle.title" />
                             </div>
-                            <h5 class="text-silver font-bold text-[22px]">{{ bundle.title }}</h5>
+                            <h4 class="text-silver font-bold text-[22px]">{{ bundle.title }}</h4>
                         </div>
                         <div class="flex flex-col gap-6">
                             <p class="text-primary leading-6">Includes 1 year access to:</p>
@@ -151,7 +151,7 @@
                             </ul>
                             <div v-if="bundle.title === 'Professional'" class="flex items-center gap-4 bg-primary bg-opacity-20 h-[80px] py-4 px-6 rounded-[10px]">
                                 <div class="flex rounded-md w-12 h-12">
-                                    <img src="~/assets/img/vue-mastery.png" alt="Vue mastery">
+                                    <NuxtImg src="/images/vue-mastery.png" alt="Vue mastery" />
                                 </div>
                                 <div class="flex flex-col font-medium">
                                     <p class="text-grey text-sm">
@@ -269,7 +269,7 @@
                             </p>
                             <div class="flex items-center gap-3">
                                 <span class="w-6 h-6 rounded-full overflow-hidden">
-                                    <img src="~/assets/img/speaker.png" alt="" srcset="" />
+                                    <NuxtImg src="/images/speaker.png" alt="Steve Popoola" />
                                 </span>
                                 <span class="text-sm text-dusk-blue group-hover:text-white">
                                     Steve Popoola
@@ -305,7 +305,7 @@
                             </p>
                             <div class="flex items-center gap-3">
                                 <span class="w-6 h-6 rounded-full overflow-hidden">
-                                    <img src="~/assets/img/speaker.png" alt="" srcset="" />
+                                    <NuxtImg src="/images/speaker.png" alt="Steve Popoola" />
                                 </span>
                                 <span class="text-sm text-dusk-blue group-hover:text-white">
                                     Steve Popoola
@@ -341,7 +341,7 @@
                             </p>
                             <div class="flex items-center gap-3">
                                 <span class="w-6 h-6 rounded-full overflow-hidden">
-                                    <img src="~/assets/img/speaker.png" alt="" srcset="" />
+                                    <NuxtImg src="/images/speaker.png" alt="Steve Popoola" />
                                 </span>
                                 <span class="text-sm text-dusk-blue group-hover:text-white">
                                     Steve Popoola
@@ -377,7 +377,7 @@
                             </p>
                             <div class="flex items-center gap-3">
                                 <span class="w-6 h-6 rounded-full overflow-hidden">
-                                    <img src="~/assets/img/speaker.png" alt="" srcset="" />
+                                    <NuxtImg src="/images/speaker.png" alt="Steve Popoola" />
                                 </span>
                                 <span class="text-sm text-dusk-blue group-hover:text-white">
                                     Steve Popoola

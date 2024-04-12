@@ -12,7 +12,7 @@
     <footer class="flex gap-12 sm:gap-16 lg:gap-[130px] flex-col lg:flex-row section-container pt-[50px] sm:pt-[70px] xl:pt-[100px] pb-[131px] sm:pb-[140px]">
         <div class="flex flex-col gap-8 sm:gap-10 lg:w-2/5 flex-shrink-0">
             <a class="mx-auto lg:ml-0" href="#" title="Vue School">
-                <img class="w-[268px]" src="~/assets/img/logo.png" alt="Vue School Logo">
+                <NuxtImg width="268" src="/images/logo.png" alt="Vue School Logo" />
             </a>
             <p class="text-center lg:text-start text-white leading-6">
                 Thanks to fine people like you, Vue School can proudly sponsor Evan and the future of Vue.js by being a Platinum Patreon
@@ -20,19 +20,19 @@
             <div class="flex flex-col gap-y-8 lg:gap-y-[50px] sm:gap-x-[22px] items-center lg:items-start">
                 <h4 class="footer-title">FOLLOW US ON SOCIAL MEDIA</h4>
                 <div class="flex gap-3 justify-between sm:w-[468px] lg:w-full">
-                    <a href="#" class="social-link">
+                    <a href="#" aria-label="Facebook page" class="social-link">
                         <FacebookIcon :fontControlled="false" />
                     </a>
-                    <a href="#" class="social-link">
+                    <a href="#" aria-label="Twitter page" class="social-link">
                         <TwitterIcon :fontControlled="false" />
                     </a>
-                    <a href="#" class="social-link">
+                    <a href="#" aria-label="Github page" class="social-link">
                         <GithubIcon :fontControlled="false" />
                     </a>
-                    <a href="#" class="social-link">
+                    <a href="#" aria-label="LinkedIn page" class="social-link">
                         <LinkedInIcon :fontControlled="false" />
                     </a>
-                    <a href="#" class="social-link">
+                    <a href="#" aria-label="Youtube page" class="social-link">
                         <YoutubeIcon :fontControlled="false" />
                     </a>
                 </div>
