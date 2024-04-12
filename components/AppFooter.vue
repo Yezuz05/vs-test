@@ -9,7 +9,7 @@
 </script>
 
 <template>
-    <footer class="container flex gap-12 sm:gap-16 lg:gap-[130px] flex-col lg:flex-row px-[15px] sm:px-10 pt-[50px] sm:pt-[70px] pb-[131px] sm:pb-[140px]">
+    <footer class="flex gap-12 sm:gap-16 lg:gap-[130px] flex-col lg:flex-row section-container pt-[50px] sm:pt-[70px] xl:pt-[100px] pb-[131px] sm:pb-[140px]">
         <div class="flex flex-col gap-8 sm:gap-10 lg:w-2/5 flex-shrink-0">
             <a class="mx-auto lg:ml-0" href="#" title="Vue School">
                 <img class="w-[268px]" src="~/assets/img/logo.png" alt="Vue School Logo">

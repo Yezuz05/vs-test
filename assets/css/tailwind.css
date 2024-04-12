@@ -6,26 +6,42 @@
     .font-rubik {
         font-family: 'Rubik', sans-serif;
     }
+    .section-container {
+        @apply 2xl:container px-[15px] sm:px-10 lg:px-[135px];
+    }
+    .text-gradient {
+        background: linear-gradient(to right, #0BD88F, #00F0FF) padding-box,
+              linear-gradient(to right, #0BD88F, #00F0FF) border-box;
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        &-mix {
+            background: linear-gradient(to right, #01F0FD, #0CD890, #01F0FD) padding-box,
+              linear-gradient(to right, #01F0FD, #0CD890, #01F0FD) border-box;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+    }
+    .btn {
+        @apply h-[60px] rounded-[10px] font-medium flex items-center justify-center;
+        &--fill {
+            @apply bg-primary text-phantom-blue;
+        }
+        &--outline {
+            @apply relative bg-transparent border-solid border-transparent border-2 text-primary;
+            background: linear-gradient(to right, #0BD88F, #00C2FF) padding-box,
+                  linear-gradient(to right, #0BD88F, #00C2FF) border-box;
+            &::after {
+                @apply absolute inset-0 rounded-[10px] z-[0] bg-phantom-blue content-[''];
+            }
+            & > * {
+                @apply relative z-[1];
+            }
+        }
+    }
 }
 
 body {
     @apply antialiased font-rubik;
-}
-
-.btn {
-    @apply h-[60px] rounded-[10px] font-medium flex items-center justify-center;
-    &--fill {
-        @apply bg-primary text-phantom-blue;
-    }
-    &--outline {
-        @apply relative bg-transparent border-solid border-transparent border-2 text-primary;
-        background: linear-gradient(to right, #0BD88F, #00C2FF) padding-box,
-              linear-gradient(to right, #0BD88F, #00C2FF) border-box;
-        &::after {
-            @apply absolute inset-0 rounded-[10px] z-[0] bg-phantom-blue content-[''];
-        }
-        & > * {
-            @apply relative z-[1];
-        }
-    }
 }
