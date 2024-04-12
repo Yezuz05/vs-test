@@ -8,10 +8,10 @@ import { MENU_ITEMS } from '~/data/constants';
 <template>
     <header class="flex items-center justify-between h-[96px] sm:h-[99px] px-6 sm:px-12">
         <div class="flex gap-6 items-center">
-            <button class="lg:hidden w-[26px] h-[24px] text-white">
+            <button aria-label="Mobile menu button" class="lg:hidden w-[26px] h-[24px] text-white">
                 <HamburgerIcon :fontControlled="false" />
             </button>
-            <img class="w-[170px]" src="~/assets/img/logo.png" alt="Vue School Logo">
+            <NuxtImg width="170" src="/images/logo.png" alt="Vue School Logo" />
         </div>
         <div class="menu">
             <template v-for="item in MENU_ITEMS" :key="item.title">
@@ -56,7 +56,7 @@ import { MENU_ITEMS } from '~/data/constants';
                 }
             }
             .dropdown {
-                @apply hidden flex-col gap-1 absolute top-[90%] left-0 bg-midnight-haze p-4 shadow-lg rounded-lg min-w-[220px];
+                @apply hidden flex-col gap-1 absolute z-20 top-[90%] left-0 bg-midnight-haze p-4 shadow-lg rounded-lg min-w-[220px];
                 a {
                     @apply text-silver flex py-2;
                     &:hover {
