@@ -3,6 +3,9 @@
 ## Data Update Explanation
 https://drive.google.com/file/d/1YkjxpQXCnNPji33z7PLirej3NEQ1kVmY/view?usp=drive_link
 
+## Preview
+[Preview](https://vs-test-zeta.vercel.app/)
+
 ## Setup
 
 Make sure to install the dependencies:
